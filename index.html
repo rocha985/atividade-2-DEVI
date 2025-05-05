@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula HTML+CSS</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f4f8;
+        color: #2c3e50;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2rem;
+        letter-spacing: 1px;
+      }
+
+      #menu {
+        background-color: #2e3a59;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        margin-bottom: 2rem;
+      }
+
+      #menu a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: background-color 0.3s, transform 0.3s ease;
+      }
+
+      #menu a:hover {
+        background-color: #3b82f6;
+        transform: translateY(-2px);
+      }
+
+      #conteudo {
+        background-color: white;
+        width: 600px;
+        height: 400px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+        overflow: auto;
+      }
+
+      #rodape {
+        background-color: #2e3a59;
+        color: #f8fafc;
+        text-align: center;
+        padding: 1rem;
+        margin-top: auto;
+        border-radius: 12px 12px 0 0;
+      }
+
+      @media (max-width: 600px) {
+        #menu {
+          flex-direction: column;
+          align-items: center;
+          padding: 1rem;
+        }
+
+        #menu a {
+          margin: 0.5rem 0;
+        }
+      }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function carregar(pagina) {
+        $('#conteudo').load(pagina);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="menu">
+        <a href="javascript:carregar('home.html')">Home</a>
+        <a href="javascript:carregar('tabelas.html')">Tabelas</a>
+        <a href="javascript:carregar('formulario1.html')">Formulário 1</a>
+        <a href="javascript:carregar('formulario2.html')">Formulário 2</a>
+        <a href="javascript:carregar('canvas.html')">Canvas</a>
+      </div>
+
+      <div id="conteudo">
+        <script>
+          carregar('home.html');
+        </script>
+      </div>
+
+      <div id="rodape">Todos os direitos reservados</div>
+    </div>
+  </body>
+</html>
