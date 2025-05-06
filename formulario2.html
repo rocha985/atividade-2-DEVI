@@ -1,29 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula HTML+CSS</title>
-    <style>
-        body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin: 0;
-          height: 100%;
-        }
-  
-        h1 {
-          text-align: center;
-        }
-      </style>
-</head>
-<body>
-    <h1>Teste com formulário</h1>
-    <br><br>
-    Essa página será utilizada para testar formulários em html:
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulário1</title>
+    <link rel="stylesheet" href="formulario1.css" />
+  </head>
+  <body>
+    <div class="formulario">
+      <h1>Adicionar cartão</h1>
 
-    <form>
-        
-    </form>
+      <form id="paymentForm" method="POST">
+        <label for="cardNumber">Número do Cartão</label>
+        <input
+          type="text"
+          id="cardNumber"
+          name="cardNumber"
+          placeholder="1234 5678 9012 3456"
+          inputmode="numeric"
+          pattern="\d{4} \d{4} \d{4} \d{4}"
+          maxlength="19"
+          minlength="19"
+          required
+          autocomplete="cc-number"
+        />
 
-</body>
+        <div class="linha">
+          <div>
+            <label for="expiry">Validade</label>
+            <input
+              type="month"
+              id="expiry"
+              name="expiry"
+              required
+              autocomplete="cc-exp"
+            />
+          </div>
+          <div>
+            <label for="cvc">CVC</label>
+            <input
+              type="text"
+              id="cvc"
+              name="cvc"
+              inputmode="numeric"
+              pattern="\d{3}"
+              maxlength="3"
+              required
+              placeholder="123"
+              autocomplete="cc-csc"
+              oninput="this.value = this.value.replace(/\D/g, '')"
+            />
+          </div>
+        </div>
+
+        <label for="name">Nome do Titular</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Nome impresso no cartão"
+          required
+          autocomplete="cc-name"
+        />
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <div
+        id="successMessage"
+        style="display: none; color: green; margin-top: 20px"
+      >
+        Cartão cadastrado com sucesso!
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
