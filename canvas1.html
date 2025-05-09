@@ -7,25 +7,25 @@
 
     <script>
       function jogar() {
-        aposta = document.getElementById('aposta');
+        let aposta = document.getElementById('aposta');
         aposta = Number(aposta.value);
-        sorteio = Math.floor(Math.random() * (4 - 1) + 1);
-        x = document.getElementById('x').getContext('2d');
+        let sorteio = Math.floor(Math.random() * (4 - 1) + 1);
+        let x = document.getElementById('x').getContext('2d');
         x.clearRect(0, 0, 300, 300);
         x.beginPath();
 
         if (sorteio == 1) {
-          x.fillStyle = 'rgb(255, 0, 255)';
+          x.fillStyle = 'red';
           x.strokeStyle = 'rgb(255, 0, 255)';
-          x.arc(100, 75, 50, 0, 2 * 3.14);
+          x.arc(150, 125, 50, 0, 2 * Math.PI);
           x.fill();
           x.stroke();
         } else if (sorteio == 2) {
-          x.fillStyle = 'rgb(255, 0, 255)';
-          x.fillRect(10, 10, 50, 50);
+          x.fillStyle = 'blue';
+          x.fillRect(125, 100, 50, 50);
         } else {
-          x.fillStyle = 'rgb(255, 0, 255)';
-          x.fillRect(10, 10, 150, 50);
+          x.fillStyle = 'green';
+          x.fillRect(75, 125, 150, 50);
         }
 
         setTimeout(() => {
@@ -34,17 +34,6 @@
         }, 500);
       }
     </script>
-    <style>
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        height: 100%;
-      }
-
-      h1 {
-        text-align: center;
-      }
-    </style>
   </head>
   <body>
     FAÇA SUA APOSTA <br />
@@ -52,15 +41,18 @@
 
     <center>
       <form>
-        <select name="aposta" id="aposta">
-          <option value="1">circulo</option>
-          <option value="2">Quadrado</option>
-          <option value="3">Retangulo</option>
-        </select>
+        <div style="display: inline-flex; gap: 10px;">
+          <select name="aposta" id="aposta">
+            <option value="1">Círculo</option>
+            <option value="2">Quadrado</option>
+            <option value="3">Retângulo</option>
+          </select>
+
+          <button type="button" onclick="jogar()">Jogar</button>
+        </div>
       </form>
 
       <br />
-      <button onclick="jogar()">Jogar</button>
 
       <canvas id="x" width="300" height="300" style="border: 1px solid #aaa">
       </canvas>

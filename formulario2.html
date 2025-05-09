@@ -2,77 +2,98 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Formulário1</title>
-    <link rel="stylesheet" href="formulario1.css" />
+    <title>Formulário 1</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+
+      input,
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        margin-bottom: 1rem;
+      }
+
+      input {
+        border: 1px solid #ccc;
+      }
+
+      .linha {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .linha > div {
+        flex: 1;
+      }
+
+      button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      button:hover {
+        background: #45a049;
+      }
+    </style>
   </head>
   <body>
     <div class="formulario">
-      <h1>Adicionar cartão</h1>
+      <h1>teste se seu cartão foi clonado</h1>
+      <br />
 
-      <form id="paymentForm" method="POST">
-        <label for="cardNumber">Número do Cartão</label>
+      <form onsubmit="enviar(event)">
+        <label>Número do Cartão</label>
         <input
           type="text"
-          id="cardNumber"
-          name="cardNumber"
           placeholder="1234 5678 9012 3456"
-          inputmode="numeric"
-          pattern="\d{4} \d{4} \d{4} \d{4}"
           maxlength="19"
-          minlength="19"
           required
-          autocomplete="cc-number"
+          oninput="this.value = this.value.replace(/\D/g, '')"
         />
 
         <div class="linha">
           <div>
-            <label for="expiry">Validade</label>
-            <input
-              type="month"
-              id="expiry"
-              name="expiry"
-              required
-              autocomplete="cc-exp"
-            />
+            <label>Validade</label>
+            <input type="month" required />
           </div>
           <div>
-            <label for="cvc">CVC</label>
+            <label>CVC</label>
             <input
               type="text"
-              id="cvc"
-              name="cvc"
-              inputmode="numeric"
-              pattern="\d{3}"
+              placeholder="123"
               maxlength="3"
               required
-              placeholder="123"
-              autocomplete="cc-csc"
               oninput="this.value = this.value.replace(/\D/g, '')"
             />
           </div>
         </div>
 
-        <label for="name">Nome do Titular</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Nome impresso no cartão"
-          required
-          autocomplete="cc-name"
-        />
+        <label>Nome do Titular</label>
+        <input type="text" placeholder="Nome impresso no cartão" required />
 
         <button type="submit">Enviar</button>
       </form>
-
-      <div
-        id="successMessage"
-        style="display: none; color: green; margin-top: 20px"
-      >
-        Cartão cadastrado com sucesso!
-      </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      function enviar(e) {
+        e.preventDefault();
+        alert('seu cartão esta seguro!!!');
+      }
+    </script>
   </body>
 </html>

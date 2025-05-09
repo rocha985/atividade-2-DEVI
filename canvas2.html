@@ -1,25 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula HTML+CSS</title>
-    <style>
-        body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin: 0;
-          height: 100%;
-        }
-  
-        h1 {
-          text-align: center;
-        }
-      </style>
-</head>
-<body>
-    <h1>Teste com tabelas</h1>
-    <br><br>
-    Essa página será utilizada para testar tabelas em html
+<h1>PEGUE O RATO!!!</h1>
+<canvas id="tela" width="400" height="300"></canvas>
 
-</body>
-</html>
+<script>
+  $(document).ready(function () {
+    const canvas = document.getElementById('tela');
+    const context = canvas.getContext('2d');
+
+    const ratImage = new Image();
+    ratImage.src = 'https://www.svgrepo.com/show/81/mouse.svg';
+    const ratWidth = 50;
+    const ratHeight = 50;
+    let ratX, ratY;
+
+    function drawRat() {
+      ratX = Math.random() * (canvas.width - ratWidth);
+      ratY = Math.random() * (canvas.height - ratHeight);
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(ratImage, ratX, ratY, ratWidth, ratHeight);
+    }
+
+    ratImage.onload = function () {
+      drawRat();
+    };
+
+    canvas.addEventListener('mousemove', function (event) {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+
+      if (
+        mouseX >= ratX &&
+        mouseX <= ratX + ratWidth &&
+        mouseY >= ratY &&
+        mouseY <= ratY + ratHeight
+      ) {
+        drawRat();
+      }
+    });
+  });
+</script>
