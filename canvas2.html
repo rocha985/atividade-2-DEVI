@@ -1,9 +1,9 @@
 <h1>PEGUE O RATO!!!</h1>
-<canvas id="tela" width="400" height="300"></canvas>
+<canvas id="ratGame" width="400" height="300"></canvas>
 
 <script>
   $(document).ready(function () {
-    const canvas = document.getElementById('tela');
+    const canvas = document.getElementById('ratGame');
     const context = canvas.getContext('2d');
 
     const ratImage = new Image();
@@ -24,17 +24,17 @@
       drawRat();
     };
 
-    canvas.addEventListener('mousemove', function (event) {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+    function isMouseOverRat(x, y) {
+      return (
+        x >= ratX && x <= ratX + ratWidth && y >= ratY && y <= ratY + ratHeight
+      );
+    }
 
-      if (
-        mouseX >= ratX &&
-        mouseX <= ratX + ratWidth &&
-        mouseY >= ratY &&
-        mouseY <= ratY + ratHeight
-      ) {
+    canvas.addEventListener('mousemove', function (event) {
+      const mouseX = event.offsetX;
+      const mouseY = event.offsetY;
+
+      if (isMouseOverRat(mouseX, mouseY)) {
         drawRat();
       }
     });
