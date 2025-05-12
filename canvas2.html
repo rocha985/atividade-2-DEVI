@@ -7,17 +7,37 @@
     const context = canvas.getContext('2d');
 
     const ratImage = new Image();
-    ratImage.src = 'https://www.svgrepo.com/show/81/mouse.svg';
+    ratImage.src = '/img/mouse.svg';
     const ratWidth = 50;
     const ratHeight = 50;
     let ratX, ratY;
+    let caught = false;
+    let canEscape = true;
 
-    function drawRat() {
+    let captureWindow = 100;
+
+    function drawRat(flipped = false) {
       ratX = Math.random() * (canvas.width - ratWidth);
       ratY = Math.random() * (canvas.height - ratHeight);
 
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(ratImage, ratX, ratY, ratWidth, ratHeight);
+      context.save();
+
+      if (flipped) {
+        context.translate(ratX + ratWidth / 2, ratY + ratHeight / 2);
+        context.rotate(Math.PI);
+        context.drawImage(
+          ratImage,
+          -ratWidth / 2,
+          -ratHeight / 2,
+          ratWidth,
+          ratHeight
+        );
+      } else {
+        context.drawImage(ratImage, ratX, ratY, ratWidth, ratHeight);
+      }
+
+      context.restore();
     }
 
     ratImage.onload = function () {
@@ -31,11 +51,38 @@
     }
 
     canvas.addEventListener('mousemove', function (event) {
+      if (caught || !canEscape) return;
+
       const mouseX = event.offsetX;
       const mouseY = event.offsetY;
 
       if (isMouseOverRat(mouseX, mouseY)) {
-        drawRat();
+        canEscape = false;
+        setTimeout(() => {
+          if (!caught) {
+            drawRat();
+            setTimeout(() => (canEscape = true), 50);
+          }
+        }, captureWindow);
+      }
+    });
+
+    canvas.addEventListener('click', function (event) {
+      if (caught) return;
+
+      const mouseX = event.offsetX;
+      const mouseY = event.offsetY;
+
+      if (isMouseOverRat(mouseX, mouseY)) {
+        caught = true;
+        drawRat(true);
+
+        setTimeout(() => {
+          alert('Você capturou o rato!');
+          caught = false;
+          canEscape = true;
+          drawRat();
+        }, 100);
       }
     });
   });

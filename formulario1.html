@@ -1,18 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula HTML+CSS</title>
-</head>
-<body>
-    <h1>Teste com formulário</h1>
-    <br><br>
-    Essa página será utilizada para testar formulários em html:
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulários Web</title>
+    <script>
+      function Calcular(event) {
+        var nome = document.getElementById('nome').value;
+        var n1 = parseFloat(document.getElementById('nota1').value);
+        var n2 = parseFloat(document.getElementById('nota2').value);
 
-    <form>
-        
+        event.preventDefault();
+
+        if (isNaN(n1) || isNaN(n2)) {
+          alert('Digite números válido');
+        } else if (nome == '') {
+          alert('Preencha seu nome');
+        } else {
+          var media = (n1 + n2) / 2;
+          if (media > 6) {
+            alert('Parabéns ' + nome + ', sua média é: ' + media);
+          } else {
+            alert('Que pena ' + nome + ', sua média é: ' + media);
+          }
+        }
+      }
+    </script>
+    <style>
+      h1 {
+        text-decoration: underline;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      form {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: rgba(168, 168, 168, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        background-color: #4caf50;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Disciplina de Web</h1>
+    <br />
+    <form onsubmit="Calcular(event)">
+      <b
+        ><label>Nome:</label>
+        <input type="text" id="nome" name="nome" maxlength="70" required />
+        <br />
+        <label>Nota 1:</label>
+        <input type="text" name="nota1" id="nota1" maxlength="10" />
+        <br />
+        <label>Nota 2:</label>
+        <input type="text" name="nota2" id="nota2" maxlength="10" />
+      </b>
+      <br /><br />
+      <center>
+        <button type="submit">Calcular</button>
+      </center>
     </form>
-
-</body>
+  </body>
 </html>
